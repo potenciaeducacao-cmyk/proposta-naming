@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta de Naming — SaaS de Proteção contra Descargas Atmosféricas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-elevated: #273548;
+    --bg-inset: #162032;
+    --border: #334155;
+    --border-hover: #475569;
+    --text: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --primary: #a78bfa;
+    --primary-strong: #8b5cf6;
+    --primary-dim: rgba(167, 139, 250, 0.12);
+    --primary-glow: rgba(167, 139, 250, 0.06);
+    --trovon: #60a5fa;
+    --trovon-dim: rgba(96, 165, 250, 0.1);
+    --trovon-border: rgba(96, 165, 250, 0.2);
+    --paron: #4ade80;
+    --paron-dim: rgba(74, 222, 128, 0.1);
+    --paron-border: rgba(74, 222, 128, 0.2);
+    --fulgor: #fbbf24;
+    --fulgor-dim: rgba(251, 191, 36, 0.1);
+    --fulgor-border: rgba(251, 191, 36, 0.2);
+    --danger: #f87171;
+    --danger-dim: rgba(248, 113, 113, 0.1);
+    --danger-border: rgba(248, 113, 113, 0.2);
+    --warning: #fb923c;
+    --warning-dim: rgba(251, 146, 60, 0.1);
+    --warning-border: rgba(251, 146, 60, 0.2);
+    --info: #60a5fa;
+    --info-dim: rgba(96, 165, 250, 0.1);
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    text-align: center;
+    padding: 64px 0 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--primary);
+    background: var(--primary-dim);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .cover h1 span { color: var(--primary); }
+
+  .cover-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .cover-meta strong { color: var(--text-muted); font-weight: 500; }
+
+  /* ── Sections ── */
+  .section { margin-bottom: 48px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+
+  p { color: var(--text-secondary); margin-bottom: 14px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ── Discarded ── */
+  .discarded-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .discarded-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    border-left: 3px solid var(--danger);
+  }
+
+  .discarded-item .name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--danger);
+    margin-bottom: 6px;
+  }
+
+  .discarded-item .reason {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ── Method pills ── */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 16px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--bg-inset);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(51,65,85,0.5);
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tr.finalist td { background: var(--primary-dim); color: var(--text); }
+  tr.finalist td:first-child { box-shadow: inset 3px 0 0 var(--primary); }
+  tr.eliminated td { opacity: 0.4; }
+  tr.reserve td { opacity: 0.65; }
+  tr.investigated td { opacity: 0.5; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .tag-fin { background: var(--primary-dim); color: var(--primary); border: 1px solid rgba(167,139,250,0.25); }
+  .tag-elim { background: var(--danger-dim); color: var(--danger); border: 1px solid var(--danger-border); }
+  .tag-res { background: var(--info-dim); color: var(--info); border: 1px solid rgba(96,165,250,0.2); }
+  .tag-dd { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning-border); }
+
+  /* ── DD cards ── */
+  .dd-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--danger);
+  }
+
+  .dd-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .dd-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--danger);
+  }
+
+  .dd-list { list-style: none; padding: 0; }
+
+  .dd-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(51,65,85,0.4);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .dd-list li:first-child { border-top: none; }
+
+  .risk {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .risk-h { background: var(--danger-dim); color: var(--danger); }
+  .risk-m { background: var(--warning-dim); color: var(--warning); }
+  .risk-l { background: var(--info-dim); color: var(--info); }
+
+  /* ── Finalist cards ── */
+  .fin-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fin-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+  }
+
+  .fin-trovon::before { background: linear-gradient(90deg, var(--trovon) 0%, transparent 60%); }
+  .fin-paron::before { background: linear-gradient(90deg, var(--paron) 0%, transparent 60%); }
+  .fin-fulgor::before { background: linear-gradient(90deg, var(--fulgor) 0%, transparent 60%); }
+
+  .fin-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .fin-icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .fin-trovon .fin-icon { background: var(--trovon-dim); color: var(--trovon); border: 1px solid var(--trovon-border); }
+  .fin-paron .fin-icon { background: var(--paron-dim); color: var(--paron); border: 1px solid var(--paron-border); }
+  .fin-fulgor .fin-icon { background: var(--fulgor-dim); color: var(--fulgor); border: 1px solid var(--fulgor-border); }
+
+  .fin-title { font-size: 26px; font-weight: 700; }
+  .fin-sub { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+
+  .fin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .fin-attr {
+    background: var(--bg-inset);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .fin-attr-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .fin-attr-val {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .fin-comp {
+    margin-top: 16px;
+    background: var(--bg-inset);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .fin-comp-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .fin-comp-val {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .fin-comp-val em { font-style: normal; color: var(--text-dim); }
+  .fin-comp-val .sep { color: var(--text-dim); margin: 0 10px; font-size: 12px; }
+
+  /* ── Comparison ── */
+  .cmp-table thead th { text-align: center; }
+  .cmp-table thead th:first-child { text-align: left; width: 160px; }
+  .cmp-table thead .col-t { color: var(--trovon); }
+  .cmp-table thead .col-p { color: var(--paron); }
+  .cmp-table thead .col-f { color: var(--fulgor); }
+  .cmp-table tbody td { text-align: center; }
+  .cmp-table tbody td:first-child { text-align: left; font-weight: 500; color: var(--text); }
+
+  .stars { display: inline-flex; gap: 2px; font-size: 14px; }
+  .s-on { color: var(--primary); }
+  .s-off { color: var(--border); }
+  .s-note { display: block; font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ── Recommendation ── */
+  .rec-box {
+    background: var(--bg-card);
+    border: 1px solid var(--trovon-border);
+    border-radius: var(--radius);
+    padding: 36px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rec-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--trovon);
+  }
+
+  .rec-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--trovon);
+    background: var(--trovon-dim);
+    border: 1px solid var(--trovon-border);
+    border-radius: 100px;
+    padding: 4px 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .rec-name {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--trovon);
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+  }
+
+  .rec-list { list-style: none; padding: 0; margin-top: 20px; }
+
+  .rec-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(51,65,85,0.4);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .rec-list li:first-child { border-top: none; }
+
+  .rec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--trovon);
+    background: var(--trovon-dim);
+    border-radius: 50%;
+    min-width: 24px; height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .alt-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .alt-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+
+  .alt-pos {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .alt-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .alt-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  .alt-paron .alt-pos { color: var(--paron); }
+  .alt-paron .alt-title { color: var(--paron); }
+  .alt-fulgor .alt-pos { color: var(--fulgor); }
+  .alt-fulgor .alt-title { color: var(--fulgor); }
+
+  /* ── Steps ── */
+  .steps { list-style: none; margin: 16px 0; }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(51,65,85,0.4);
+  }
+
+  .step:first-child { border-top: none; }
+
+  .step-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-dim);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 8px;
+    min-width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-body { flex: 1; }
+  .step-title { font-weight: 600; font-size: 14px; color: var(--text); }
+  .step-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+  .step-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    background: var(--bg-inset);
+    border-radius: 100px;
+    padding: 4px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .inv-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .inv-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .inv-val { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+  .inv-label { font-size: 11px; color: var(--text-dim); }
+
+  /* ── Reserve ── */
+  .res-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .res-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+  }
+
+  .res-name { font-size: 18px; font-weight: 600; color: var(--text-secondary); }
+  .res-type { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 6px; }
+  .res-desc { font-size: 12px; color: var(--text-dim); }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .footer-brand { font-size: 15px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+  .footer p { font-size: 12px; color: var(--text-dim); text-align: center; }
+
+  .footer-line {
+    width: 80px;
+    height: 1px;
+    margin: 0 auto 20px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; color: #1a1a1a; font-size: 12px; }
+    .page { padding: 16px; max-width: 100%; }
+    .cover { padding: 32px 0 24px; }
+    .cover h1 { font-size: 24px; color: #1a1a1a; }
+    .cover h1 span { color: #6d28d9; }
+    .section { break-inside: avoid; }
+    .fin-card, .rec-box, .dd-card { border-color: #e2e8f0; background: #f8fafc; break-inside: avoid; }
+    .tag-fin { background: #ede9fe; color: #6d28d9; }
+    .tag-elim { background: #fee2e2; color: #dc2626; }
+    .tag-dd { background: #ffedd5; color: #ea580c; }
+    .tag-res { background: #dbeafe; color: #2563eb; }
+    .s-on { color: #6d28d9; }
+    .s-off { color: #d1d5db; }
+    .section-label, .cover-badge, .step-n, .rec-num { color: #6d28d9; }
+    .rec-name { color: #2563eb; }
+    thead th { background: #f1f5f9; }
+    tr.finalist td { background: #ede9fe; }
+    .fin-trovon .fin-icon { background: #dbeafe; color: #2563eb; }
+    .fin-paron .fin-icon { background: #dcfce7; color: #16a34a; }
+    .fin-fulgor .fin-icon { background: #fef3c7; color: #d97706; }
+    .inv-val { color: #6d28d9; }
+    p, td, li, .fin-attr-val, .alt-desc, .dd-list li { color: #475569; }
+    strong { color: #1a1a1a; }
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 24px 16px; }
+    .cover h1 { font-size: 24px; }
+    .discarded-row, .fin-grid, .inv-row, .res-row, .alt-row { grid-template-columns: 1fr; }
+    .rec-name { font-size: 32px; }
+    .cover-meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-badge">&#9889; v2 &mdash; Revisão ampliada</div>
+    <h1>Proposta de <span>Naming</span></h1>
+    <p class="cover-sub">SaaS de Proteção contra Descargas Atmosféricas</p>
+    <div class="cover-meta">
+      <span><strong>Data</strong>&nbsp; 07/04/2026</span>
+      <span><strong>Autor</strong>&nbsp; Pietro Rancan Peres</span>
+      <span><strong>Para</strong>&nbsp; Sócios e Conselho</span>
+    </div>
+  </header>
+
+  <!-- 01 CONTEXTO -->
+  <section class="section">
+    <div class="section-label">01 &mdash; Contexto</div>
+    <h2>Por que precisamos de um novo nome</h2>
+    <p>Nosso SaaS de <strong>proteção contra descargas atmosféricas</strong> (NBR 5419) precisa de um <strong>nome definitivo</strong> para lançamento comercial. O produto abrange todo o escopo da norma — análise de risco, projeto de SPDA, dimensionamento e documentação técnica.</p>
+
+    <h3>Nomes descartados</h3>
+    <div class="discarded-row">
+      <div class="discarded-item">
+        <div class="name">Tupã</div>
+        <div class="reason">Propriedade intelectual do Prof. Hélio Sueta (planilha Tupã v3). Não podemos usar.</div>
+      </div>
+      <div class="discarded-item">
+        <div class="name">S-PDA Potência</div>
+        <div class="reason">Sigla técnica longa (8 sílabas), difícil de lembrar e falar. Não funciona como marca.</div>
+      </div>
+    </div>
+
+    <p><strong>O que buscamos:</strong> Nome de 2–3 sílabas que comunique poder, proteção ou raio; fácil de falar e lembrar; funcione no dia a dia do engenheiro ("projeta no ___", "calcula no ___"); com disponibilidade de domínio e marca.</p>
+  </section>
+
+  <!-- 02 METODOLOGIA -->
+  <section class="section">
+    <div class="section-label">02 &mdash; Metodologia</div>
+    <h2>Como avaliamos cada nome</h2>
+    <p>A análise foi conduzida em <strong>duas rodadas</strong> com cinco eixos complementares:</p>
+    <div class="pills">
+      <div class="pill">&#128264; Fonossemântica</div>
+      <div class="pill">&#128222; Teste do telefone</div>
+      <div class="pill">&#9997;&#65039; Teste do verbo</div>
+      <div class="pill">&#127760; Pesquisa de domínios</div>
+      <div class="pill">&#128269; Conflitos de marca</div>
+    </div>
+    <p>Na <strong>1ª rodada</strong>, 15 nomes gerados e filtrados por critérios linguísticos e estratégicos. Na <strong>2ª rodada</strong>, 3 nomes adicionais investigados em profundidade com pesquisa de domínios e due diligence de marca.</p>
+  </section>
+
+  <!-- 03 CANDIDATOS -->
+  <section class="section">
+    <div class="section-label">03 &mdash; Candidatos</div>
+    <h2>18 nomes avaliados</h2>
+    <p><strong>3 finalistas</strong>, 2 reservas, 2 eliminados por due diligence e 11 eliminados por critérios iniciais.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Nome</th><th>Síl.</th><th>Tipo</th><th>Significado</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr class="eliminated"><td>1</td><td>Raion</td><td>3</td><td>Alterado</td><td>"Raio" + sufixo tech</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="finalist"><td>2</td><td><strong>Fulgor</strong></td><td>2</td><td>Metafórico</td><td>Brilho intenso, clarão</td><td><span class="tag tag-fin">Finalista</span></td></tr>
+          <tr class="reserve"><td>3</td><td>Centella</td><td>3</td><td>Sugestivo</td><td>Faísca / raio (pt. antigo)</td><td><span class="tag tag-res">Reserva</span></td></tr>
+          <tr class="finalist"><td>4</td><td><strong>Trovon</strong></td><td>2</td><td>Alterado</td><td>"Trovão" alterado</td><td><span class="tag tag-fin">Finalista</span></td></tr>
+          <tr class="reserve"><td>5</td><td>Aegis</td><td>3</td><td>Metafórico</td><td>Escudo de Zeus</td><td><span class="tag tag-res">Reserva</span></td></tr>
+          <tr class="eliminated"><td>6</td><td>Blindar</td><td>2</td><td>Descritivo</td><td>Verbo de proteção</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="eliminated"><td>7</td><td>Vortex</td><td>2</td><td>Metafórico</td><td>Fenômeno atmosférico</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="eliminated"><td>8</td><td>Stormix</td><td>2</td><td>Composto</td><td>Storm + mix</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="finalist"><td>9</td><td><strong>Paron</strong></td><td>2</td><td>Abstrato</td><td>De "para-raios"</td><td><span class="tag tag-fin">Finalista</span></td></tr>
+          <tr class="eliminated"><td>10</td><td>Farad</td><td>2</td><td>Metafórico</td><td>Unidade elétrica</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="eliminated"><td>11</td><td>Celus</td><td>2</td><td>Abstrato</td><td>"Céu" + "lux"</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="eliminated"><td>12</td><td>Nimbus</td><td>2</td><td>Metafórico</td><td>Nuvem de tempestade</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="eliminated"><td>13</td><td>Surto</td><td>2</td><td>Descritivo</td><td>Surto elétrico</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="investigated"><td>14</td><td>Kerion</td><td>3</td><td>Abstrato</td><td>"Keraunos" (raio, grego)</td><td><span class="tag tag-dd">Due diligence</span></td></tr>
+          <tr class="eliminated"><td>15</td><td>Arco</td><td>2</td><td>Sugestivo</td><td>Arco elétrico</td><td><span class="tag tag-elim">Eliminado</span></td></tr>
+          <tr class="investigated"><td>16</td><td>Celux</td><td>2</td><td>Abstrato</td><td>"Céu" + "lux" (variante)</td><td><span class="tag tag-dd">Due diligence</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 04 DUE DILIGENCE -->
+  <section class="section">
+    <div class="section-label">04 &mdash; Due Diligence</div>
+    <h2>Nomes investigados e eliminados</h2>
+    <p>Dois nomes adicionais foram investigados em profundidade e <strong>eliminados</strong> por conflitos significativos.</p>
+
+    <div class="dd-card">
+      <div class="dd-top">
+        <span class="dd-name">Kerion</span>
+        <span class="tag tag-elim">Eliminado</span>
+      </div>
+      <ul class="dd-list">
+        <li><span class="risk risk-h">ALTO</span><span><strong>Kerion Engenharia &amp; Sistema</strong> — empresa brasileira de tecnologia (kerion.tec.br). Mesmo setor, mesmo país.</span></li>
+        <li><span class="risk risk-h">ALTO</span><span><strong>Kerion Ceramics (Portugal)</strong> — marca registrada no USPTO (Serial 79072697). Potencial oposição ao registro.</span></li>
+        <li><span class="risk risk-m">MÉDIO</span><span><strong>Kerio Technologies</strong> — empresa de e-mail/segurança (GFI Software). Nome foneticamente quase idêntico em TI.</span></li>
+        <li><span class="risk risk-h">ALTO</span><span><strong>Termo médico</strong> — "Kerion" é infecção fúngica do couro cabeludo. Domina resultados de busca. SEO inviável.</span></li>
+      </ul>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-top">
+        <span class="dd-name">Celux</span>
+        <span class="tag tag-elim">Eliminado</span>
+      </div>
+      <ul class="dd-list">
+        <li><span class="risk risk-h">ALTO</span><span><strong>CELLUX Brasil</strong> — marca tradicional de fitas adesivas (Blumenau/SC, quase 100 anos). Foneticamente idêntica. INPI pode bloquear.</span></li>
+        <li><span class="risk risk-m">MÉDIO</span><span><strong>Celux (celux.co)</strong> — empresa australiana de consultoria em IA. Mesmo nome, setor tech.</span></li>
+        <li><span class="risk risk-l">BAIXO</span><span><strong>Celux Iluminación (Espanha)</strong> — fabricante de LED. Setor diferente, nome exato.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 FINALISTAS -->
+  <section class="section">
+    <div class="section-label">05 &mdash; Finalistas</div>
+    <h2>Os 3 nomes recomendados</h2>
+
+    <!-- TROVON -->
+    <div class="fin-card fin-trovon">
+      <div class="fin-top">
+        <div class="fin-icon">Tr</div>
+        <div><div class="fin-title">Trovon</div><div class="fin-sub">Derivação de "trovão" — força atmosférica pura</div></div>
+      </div>
+      <div class="fin-grid">
+        <div class="fin-attr"><div class="fin-attr-label">Origem</div><div class="fin-attr-val">Derivação de <strong>"trovão"</strong> — fenômeno atmosférico diretamente ligado a descargas</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Fonossemântica</div><div class="fin-attr-val"><strong>/tr/</strong> cluster forte (impacto) + <strong>/von/</strong> vogal posterior (gravidade)</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do verbo</div><div class="fin-attr-val">"<strong>Projeta no Trovon</strong>" — funciona naturalmente</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do telefone</div><div class="fin-attr-val"><strong>T-R-O-V-O-N</strong> — claro, sem ambiguidade</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Domínios</div><div class="fin-attr-val"><strong>trovon.app</strong> — provavelmente disponível<br>.com.br registrado sem uso (negociável)</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Conflitos</div><div class="fin-attr-val"><strong>Risco baixo.</strong> Trovon Seguros (SP, setor diferente). Nenhuma empresa tech usa o nome.</div></div>
+      </div>
+      <div class="fin-comp"><div class="fin-comp-label">Composição com marca mãe</div><div class="fin-comp-val">Trovon <em>by Potência</em><span class="sep">|</span>Trovon <em>(Potência Educação)</em></div></div>
+    </div>
+
+    <!-- PARON -->
+    <div class="fin-card fin-paron">
+      <div class="fin-top">
+        <div class="fin-icon">Pa</div>
+        <div><div class="fin-title">Paron</div><div class="fin-sub">De "para-raios" — inventado, altamente protegível</div></div>
+      </div>
+      <div class="fin-grid">
+        <div class="fin-attr"><div class="fin-attr-label">Origem</div><div class="fin-attr-val">Condensação de <strong>"para-raios"</strong>. Palavra inventada com referência técnica implícita.</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Fonossemântica</div><div class="fin-attr-val"><strong>/pa/</strong> plosiva aberta (acessível) + <strong>/ron/</strong> nasal forte (solidez)</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do verbo</div><div class="fin-attr-val">"<strong>Projeta no Paron</strong>" — funciona naturalmente</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do telefone</div><div class="fin-attr-val"><strong>P-A-R-O-N</strong> — 5 letras, claro, sem ambiguidade</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Domínios</div><div class="fin-attr-val"><strong>paron.app</strong> — a verificar<br><strong>paron.net</strong> — à venda (Bodis)<br>.com.br — a verificar</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Conflitos</div><div class="fin-attr-val"><strong>Risco baixo-médio.</strong> ParonSoft (Bangladesh, micro). Paron Madeiras (RJ). Nenhum SaaS usa o nome.</div></div>
+      </div>
+      <div class="fin-comp"><div class="fin-comp-label">Composição com marca mãe</div><div class="fin-comp-val">Paron <em>by Potência</em><span class="sep">|</span>Paron <em>(Potência Educação)</em></div></div>
+    </div>
+
+    <!-- FULGOR -->
+    <div class="fin-card fin-fulgor">
+      <div class="fin-top">
+        <div class="fin-icon">Fu</div>
+        <div><div class="fin-title">Fulgor</div><div class="fin-sub">Brilho intenso, clarão — elegância técnica</div></div>
+      </div>
+      <div class="fin-grid">
+        <div class="fin-attr"><div class="fin-attr-label">Origem</div><div class="fin-attr-val">Palavra portuguesa: <strong>brilho intenso, clarão, resplendor.</strong> Associação natural com descarga elétrica.</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Fonossemântica</div><div class="fin-attr-val"><strong>/f/</strong> fricativa (velocidade) + <strong>/gor/</strong> plosiva (força, solidez)</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do verbo</div><div class="fin-attr-val">"<strong>Projeta no Fulgor</strong>" — funciona, som mais sofisticado</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Teste do telefone</div><div class="fin-attr-val"><strong>F-U-L-G-O-R</strong> — claro, sem ambiguidade</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Domínios</div><div class="fin-attr-val"><strong>fulgor.app</strong> — provavelmente disponível<br>.com.br registrado (Fulgor Artefatos de Borracha)</div></div>
+        <div class="fin-attr"><div class="fin-attr-label">Conflitos</div><div class="fin-attr-val"><strong>Risco médio.</strong> Fulgor (borracha, BR). Fulgor Milano (eletrodomésticos). Nenhum software usa o nome.</div></div>
+      </div>
+      <div class="fin-comp"><div class="fin-comp-label">Composição com marca mãe</div><div class="fin-comp-val">Fulgor <em>by Potência</em><span class="sep">|</span>Fulgor <em>(Potência Educação)</em></div></div>
+    </div>
+  </section>
+
+  <!-- 06 COMPARATIVO -->
+  <section class="section">
+    <div class="section-label">06 &mdash; Comparativo</div>
+    <h2>Análise lado a lado</h2>
+
+    <div class="table-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr><th>Critério</th><th class="col-t">Trovon</th><th class="col-p">Paron</th><th class="col-f">Fulgor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Memorabilidade</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td></tr>
+          <tr><td>Comunicação do produto</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span><span class="s-note">trovão = raio</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">para-raios, sutil</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">clarão, indireto</span></td></tr>
+          <tr><td>Teste do verbo</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td></tr>
+          <tr><td>Disponibilidade de domínio</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span><span class="s-note">.app livre</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">a verificar</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span><span class="s-note">.app livre</span></td></tr>
+          <tr><td>Risco de conflito de marca</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span><span class="s-note">baixo</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">baixo-médio</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">médio</span></td></tr>
+          <tr><td>Registrabilidade INPI</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">derivado</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span><span class="s-note">inventado</span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span><span class="s-off">&#9733;</span></span><span class="s-note">palavra existente</span></td></tr>
+          <tr><td>Elegância / sofisticação</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td></tr>
+          <tr><td>Escalabilidade</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span></span></td></tr>
+          <tr><td>Apelo internacional</td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td><td><span class="stars"><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-on">&#9733;</span><span class="s-off">&#9733;</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 07 RECOMENDAÇÃO -->
+  <section class="section">
+    <div class="section-label">07 &mdash; Recomendação</div>
+    <h2>Nossa escolha</h2>
+
+    <div class="rec-box">
+      <div class="rec-badge">&#10003; Opção recomendada</div>
+      <div class="rec-name">Trovon</div>
+      <ul class="rec-list">
+        <li><span class="rec-num">1</span><span><strong>Comunicação imediata.</strong> O engenheiro ouve "Trovon" e pensa em trovão, raio, proteção contra descargas. Não precisa de explicação.</span></li>
+        <li><span class="rec-num">2</span><span><strong>Menor risco de conflito.</strong> Nenhuma empresa de software/tecnologia usa esse nome. Conflitos existentes são de setores completamente diferentes.</span></li>
+        <li><span class="rec-num">3</span><span><strong>Disponibilidade de domínio.</strong> trovon.app provavelmente disponível para registro imediato.</span></li>
+        <li><span class="rec-num">4</span><span><strong>Som de impacto.</strong> Consoantes plosivas (/tr/, /v/) comunicam força — alinhado com proteção contra descargas.</span></li>
+        <li><span class="rec-num">5</span><span><strong>Teste do dia a dia.</strong> "Você já projetou no Trovon?" — funciona como conversa natural entre engenheiros.</span></li>
+      </ul>
+    </div>
+
+    <div class="alt-row">
+      <div class="alt-box alt-paron">
+        <span class="alt-pos">Alternativa #2</span>
+        <div class="alt-title">Paron</div>
+        <div class="alt-desc">O mais protegível dos três — palavra inventada, registro INPI forte. Referência sutil a "para-raios" que o engenheiro capta. Domínio requer verificação antes de decidir.</div>
+      </div>
+      <div class="alt-box alt-fulgor">
+        <span class="alt-pos">Alternativa #3</span>
+        <div class="alt-title">Fulgor</div>
+        <div class="alt-desc">O mais elegante e sofisticado. Forte escalabilidade. Risco de conflito ligeiramente maior, mas nenhum software usa o nome.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 PRÓXIMOS PASSOS -->
+  <section class="section">
+    <div class="section-label">08 &mdash; Próximos passos</div>
+    <h2>Após aprovação do nome</h2>
+
+    <ul class="steps">
+      <li class="step"><span class="step-n">1</span><div class="step-body"><div class="step-title">Registrar domínio .app (e .com.br se possível)</div><div class="step-desc">Verificar disponibilidade e efetuar registro imediato</div></div><span class="step-time">1 dia</span></li>
+      <li class="step"><span class="step-n">2</span><div class="step-body"><div class="step-title">Consulta prévia de marca no INPI</div><div class="step-desc">Classes 9 (software) e 42 (SaaS / serviços de tecnologia)</div></div><span class="step-time">1–2 sem</span></li>
+      <li class="step"><span class="step-n">3</span><div class="step-body"><div class="step-title">Solicitar registro de marca no INPI</div><div class="step-desc">Protocolo formal de registro de marca</div></div><span class="step-time">30 dias</span></li>
+      <li class="step"><span class="step-n">4</span><div class="step-body"><div class="step-title">Atualizar identidade visual no produto</div><div class="step-desc">Renomear em todo o código-fonte e interfaces</div></div><span class="step-time">1–2 dias</span></li>
+      <li class="step"><span class="step-n">5</span><div class="step-body"><div class="step-title">Atualizar landing page e materiais</div><div class="step-desc">Website, redes sociais, apresentações comerciais</div></div><span class="step-time">1 sem</span></li>
+    </ul>
+
+    <h3>Investimento estimado</h3>
+    <div class="inv-row">
+      <div class="inv-item"><div class="inv-val">R$ 70</div><div class="inv-label">Domínio .app / ano</div></div>
+      <div class="inv-item"><div class="inv-val">R$ 355</div><div class="inv-label">Registro INPI (PJ)</div></div>
+      <div class="inv-item"><div class="inv-val">R$ 40</div><div class="inv-label">Domínio .com.br / ano</div></div>
+    </div>
+  </section>
+
+  <!-- 09 RESERVA -->
+  <section class="section">
+    <div class="section-label">09 &mdash; Reserva técnica</div>
+    <h2>Caso os 3 finalistas sejam descartados</h2>
+    <div class="res-row">
+      <div class="res-item"><div class="res-name">Centella</div><div class="res-type">Sugestivo</div><div class="res-desc">Faísca / raio. 3 sílabas. Único no mercado.</div></div>
+      <div class="res-item"><div class="res-name">Aegis</div><div class="res-type">Metafórico</div><div class="res-desc">Escudo de Zeus. Apelo internacional.</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <div class="footer-brand">Potência Educação</div>
+    <p>Documento preparado com apoio de análise de naming estratégico,<br>pesquisa de domínios e due diligence de marcas.</p>
+    <p style="margin-top:10px">Confidencial — Uso interno</p>
+  </footer>
+
+</div>
+</body>
+</html>
