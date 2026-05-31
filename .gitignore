@@ -1,9 +1,0 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-
-# Saída do baixador de legendas
-legendas/

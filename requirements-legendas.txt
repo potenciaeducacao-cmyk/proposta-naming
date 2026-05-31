@@ -1,4 +1,0 @@
-# Dependências do baixar_legendas.py
-# A lib principal cobre a maioria dos casos; o yt-dlp é o fallback robusto.
-youtube-transcript-api>=1.0.0
-yt-dlp>=2024.1.0
